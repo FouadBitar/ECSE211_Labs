@@ -1,7 +1,7 @@
 package ca.mcgill.ecse211.searcher;
 
 import java.util.ArrayList;
-import ca.mcgill.ecse211.lab5.Display;
+import ca.mcgill.ecse211.lab5.lab5;
 import ca.mcgill.ecse211.odometer.Odometer;
 import ca.mcgill.ecse211.odometer.OdometerExceptions;
 import ca.mcgill.ecse211.sensors.DataController;
@@ -24,7 +24,7 @@ public class Search extends Thread {
 
 	private static int waypoints[][];
 	
-	private static final int RING_INBOUND = 13;
+	private static final int RING_INBOUND = 6;
 	private static final int LARGEST_RADIUS = 6;
 	private static final int CENTER_TO_SENSOR = 6; //distance from center of wheels to ring light sensor,  
 													//should be slightly higher than actual value
@@ -55,7 +55,7 @@ public class Search extends Thread {
 	
 	@SuppressWarnings("unused")
 	public void run() {
-		moveToSearchRegion();	
+		//moveToSearchRegion();	
 		
 		//use sensors on both sides to correct for straight passing
 		//	can turn on this thread only when correcting
@@ -67,18 +67,32 @@ public class Search extends Thread {
 		double d;
 		boolean isNotConsecutiveRing = true;
 		
+		//change starting values
+		odo.setXYT(LL_X * lab5.SQUARE_SIZE, LL_Y * lab5.SQUARE_SIZE, 90);
+		
 		//move to next point
-		for (int i = 0; i < waypoints.length; i++) {
+		for (int i = 1; i < waypoints.length; i++) {
 			nextXY = waypoints[i];
-			navigator.travelToCoordinate(nextXY[0], nextXY[1]); 
+			// Convert X & Y coordinates to actual length (cm)
+			int x = (int) ((int) nextXY[0] * lab5.SQUARE_SIZE);
+			int y = (int) ((int) nextXY[1] * lab5.SQUARE_SIZE);
+			double theta = odo.getXYT()[2];
+			if(theta < 180 && theta > 0) {
+				x = x - 10;
+			} else {
+				x = x + 10;
+			}
+			navigator.travelToCoordinate(x, y); 
 			while(true) {
 				d = dataCont.getD();
-				if (d < RING_INBOUND) { //ring detected ahead
-					getInPosition(navigator.convertCoordinates(nextXY));
-					detectRingColor(navigator.convertCoordinates(nextXY));
-					//avoid
-					if (isNotConsecutiveRing) {
-						
+				if (d < RING_INBOUND) { //ring for sure ahead
+					detectRingColor();//detect color
+					break;
+				} else if (d > 13) {
+					if (navigator.shimmy()) { //double check if there is ring
+						detectRingColor();//get in position
+					} else {
+						break;//go to next point
 					}
 				}
 			}
@@ -92,6 +106,9 @@ public class Search extends Thread {
 		//if there is another ring detect and analyze, then avoid again
 	}
 	
+
+
+
 	/**
 	 * this method is to stop the robot just before the 
 	 * start of the largest ring to avoid detecting the floor
@@ -112,16 +129,18 @@ public class Search extends Thread {
 	/** 
 	 * @return ring color code
 	 */
-	private int detectRingColor(double[] xy) {
-		navigator.moveStraight(leftMotor, rightMotor, RING_WIDTH, ULTRA_SLOW_SPEED, true, true);
+	private int detectRingColor() {
+		navigator.turnRobot(leftMotor, rightMotor, 30, 30, true, true);
 		ArrayList<Integer> samples = new ArrayList<Integer>();
 		int colorCode = 0;
 		while(leftMotor.isMoving()) {
 			colorCode = ColorDetector.detectColor(dataCont.getRGB()); //gets sensor data and passes to colordetector class
 			samples.add(colorCode);
 		}
+		navigator.turnRobot(leftMotor, rightMotor, 30, 30, false, true);
 		colorCode = findMode(samples);
-		Display.objectDetected(colorCode);
+//		Display.objectDetected(colorCode);
+		System.out.println("" + colorCode);
 		return colorCode;
 	}
 	

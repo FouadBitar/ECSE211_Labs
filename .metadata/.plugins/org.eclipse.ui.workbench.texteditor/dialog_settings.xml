@@ -2,21 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="processUSData" key="selection"/>
+		<item value="Nav" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="processUSData"/>
-			<item value="odo"/>
-			<item value="lightSensor"/>
-			<item value="getXYTD"/>
-			<item value="print"/>
-			<item value="sound"/>
-			<item value="s"/>
-			<item value="theta"/>
-			<item value="process"/>
+			<item value="nav"/>
+			<item value="buttonChoice"/>
+			<item value="sleep"/>
+			<item value="colorDetection"/>
+			<item value="goHome"/>
+			<item value="myColorSampleLeft"/>
+			<item value="usLocalizer"/>
+			<item value="detectRingColor"/>
+			<item value="detectColor"/>
+			<item value="correctedTurnTo"/>
+			<item value="turnTo"/>
+			<item value="turnwith"/>
+			<item value="poller"/>
+			<item value="search"/>
+			<item value="lightRing"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -25,7 +31,7 @@
 		<item value="290" key="DIALOG_WIDTH"/>
 		<item value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont" key="DIALOG_FONT_NAME"/>
 		<item value="409" key="DIALOG_HEIGHT"/>
-		<item value="719" key="DIALOG_X_ORIGIN"/>
-		<item value="105" key="DIALOG_Y_ORIGIN"/>
+		<item value="983" key="DIALOG_X_ORIGIN"/>
+		<item value="264" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

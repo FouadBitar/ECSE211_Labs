@@ -7,13 +7,10 @@
 <fullyQualifiedTypeName name="lejos.hardware.lcd.TextLCD"/>
 <fullyQualifiedTypeName name="lejos.hardware.sensor.SensorModes"/>
 <fullyQualifiedTypeName name="lejos.hardware.sensor.EV3UltrasonicSensor"/>
-<fullyQualifiedTypeName name="lejos.hardware.Button"/>
 <fullyQualifiedTypeName name="lejos.hardware.motor.EV3LargeRegulatedMotor"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.odometer.Odometer"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.lab4.lab4"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.lab5.Display"/>
-<fullyQualifiedTypeName name="lejos.hardware.Sound"/>
-<fullyQualifiedTypeName name="ca.mcgill.ecse211.searcher.Search"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.sensors.UltrasonicPoller"/>
 <fullyQualifiedTypeName name="java.util.concurrent.locks.Condition"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.odometer.OdometerExceptions"/>
@@ -21,4 +18,12 @@
 <fullyQualifiedTypeName name="lejos.robotics.SampleProvider"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.sensors.LightColorPoller"/>
 <fullyQualifiedTypeName name="ca.mcgill.ecse211.sensors.DataController"/>
+<fullyQualifiedTypeName name="lejos.robotics.navigation.Navigator"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="ca.mcgill.ecse211.searcher.Search"/>
+<fullyQualifiedTypeName name="lejos.hardware.Sound"/>
+<fullyQualifiedTypeName name="ca.mcgill.ecse211.lab5.lab5"/>
+<fullyQualifiedTypeName name="ca.mcgill.ecse211.lab5.Lab5"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="lejos.hardware.Button"/>
 </qualifiedTypeNameHistroy>

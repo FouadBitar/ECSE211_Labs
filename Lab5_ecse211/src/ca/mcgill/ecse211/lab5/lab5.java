@@ -32,15 +32,17 @@ public class lab5 {
 	private static final EV3LargeRegulatedMotor leftMotor =
 			new EV3LargeRegulatedMotor(LocalEV3.get().getPort("A"));
 	private static final EV3LargeRegulatedMotor rightMotor =
-			new EV3LargeRegulatedMotor(LocalEV3.get().getPort("D"));
+			new EV3LargeRegulatedMotor(LocalEV3.get().getPort("B"));
 
  
 	public static final double WHEEL_RAD = 2.2;
-	public static final double TRACK = 11.3;
+	public static final double TRACK = 11.45;
+	public static final double SQUARE_SIZE = 30.48;
 	
 	
-	 
+
 	public static void main(String[] args) throws OdometerExceptions {
+		
 		
 		Odometer odometer = Odometer.getOdometer(leftMotor, rightMotor, TRACK, WHEEL_RAD); 
 		Navigation navigator = new Navigation(leftMotor, rightMotor);
@@ -54,15 +56,15 @@ public class lab5 {
 		SampleProvider usDistance = usSensor.getMode("Distance");
 		float[] usData = new float[usDistance.sampleSize()];
 		
+//		@SuppressWarnings("resource")
+//		SensorModes lightSensor = new EV3ColorSensor(LocalEV3.get().getPort("S2"));
+//		SampleProvider lightSample = lightSensor.getMode("Red");
+//		float[] lightData = new float[lightSensor.sampleSize()];
+//		
 		@SuppressWarnings("resource")
-		SensorModes lightSensor = new EV3ColorSensor(LocalEV3.get().getPort("S2"));
-		SampleProvider lightSample = lightSensor.getMode("Red");
-		float[] lightData = new float[lightSensor.sampleSize()];
-		
-		@SuppressWarnings("resource")
-		SensorModes ringSensor = new EV3ColorSensor(LocalEV3.get().getPort("S2"));
+		SensorModes ringSensor = new EV3ColorSensor(LocalEV3.get().getPort("S4"));
 		SampleProvider ringSample = ringSensor.getMode("Red");
-		float[] ringData = new float[lightSensor.sampleSize()];
+		float[] ringData = new float[ringSensor.sampleSize()];
 				
 		
 		//Start odometer and sensor threads
@@ -70,30 +72,40 @@ public class lab5 {
 		odoThread.start();
 		Thread usPoller = new UltrasonicPoller(usDistance, usData, dataCont);
 		usPoller.start();
-	    Thread lightGPoller = new LightPoller(lightSample, lightData, dataCont);
-	    lightGPoller.start();
+//	    Thread lightGPoller = new LightPoller(lightSample, lightData, dataCont);
+//	    lightGPoller.start();
 	    Thread lightRPoller = new LightColorPoller(ringSample, ringData, dataCont);
 	    lightRPoller.start();
+		
+//		Navigation.moveStraight(leftMotor, rightMotor, 50, 100, true, true);
+//		while (leftMotor.isMoving()) {
+//			double d = dataCont.getD();
+//			System.out.print("" + d + ", ");
+//			try {
+//				Thread.sleep(200);
+//			} catch (Exception e) {
+//			} // Poor man's timed sampling
+//		}
 		
 		
 	    //wait to initiate field trial
 		Button.waitForAnyPress();
 		
-		//Start ultrasonic localizer thread and wait for it to finish
-		uLocalizer.start();
-		try {
-			uLocalizer.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		//Start light localizer and wait for it to finish
-		lLocalizer.start();
-		try {
-			lLocalizer.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		//Start ultrasonic localizer thread and wait for it to finish
+//		uLocalizer.start();
+//		try {
+//			uLocalizer.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		//Start light localizer and wait for it to finish
+//		lLocalizer.start();
+//		try {
+//			lLocalizer.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		
 		//start search thread
 		tracker.start();

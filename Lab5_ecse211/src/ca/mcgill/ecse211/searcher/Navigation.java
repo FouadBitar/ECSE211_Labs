@@ -11,7 +11,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
  */
 public class Navigation {
 	
-	private static final int FORWARD_SPEED = 180;
+	private static final int FORWARD_SPEED = 100;
   	private static final int ROTATE_SPEED = 150;
   	private static final double TILE_SIZE = 30.48;
   	private EV3LargeRegulatedMotor leftMotor;
@@ -87,7 +87,7 @@ public class Navigation {
 		rightMotor.setSpeed(FORWARD_SPEED);
 
 		leftMotor.rotate(convertDistance(lab5.WHEEL_RAD, distance), true);
-		rightMotor.rotate(convertDistance(lab5.WHEEL_RAD, distance), true);
+		rightMotor.rotate(convertDistance(lab5.WHEEL_RAD, distance), false);
 	}
 	
     /**
@@ -145,7 +145,7 @@ public class Navigation {
 	 * @param forwards : if true then it goes forward direction
 	 * @param continueRunning : if true then program does not wait for wheels to stop, false program waits  
 	 */
-	public void moveStraight(EV3LargeRegulatedMotor leftMotor, EV3LargeRegulatedMotor rightMotor, 
+	public static void moveStraight(EV3LargeRegulatedMotor leftMotor, EV3LargeRegulatedMotor rightMotor, 
 			double distance, int speed, boolean forwards, boolean continueRunning) {
 		int i = 1;
 		if (!forwards) i = -1;
@@ -199,6 +199,25 @@ public class Navigation {
 	
 	public static boolean isNavigating() {
 		return isNavigating;
+	}
+
+	public boolean shimmy() {
+		boolean ringAhead = false;
+		turnRobot(leftMotor, rightMotor, 10, 40, true, false);
+		if (dataCont.getD() < 13) {
+			turnRobot(leftMotor, rightMotor, -10, 40, false, false);
+			return true;
+		}
+		turnRobot(leftMotor, rightMotor, -20, 40, false, false);
+		if (dataCont.getD() < 13) {
+			ringAhead = true;
+			turnRobot(leftMotor, rightMotor, 10, 40, true, false);
+			return ringAhead;
+		}
+		turnRobot(leftMotor, rightMotor, 10, 40, true, false);
+		return ringAhead;
+		
+		
 	}
 
 }

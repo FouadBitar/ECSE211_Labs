@@ -4,11 +4,28 @@
 		<item value="/Users/fumaster101/Desktop/Lab2 Code/Lab2-Odometer/src/ca/mcgill/ecse211/lab2"/>
 	</list>
 	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/fumaster101/eclipse-workspace/lab5_v2"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="/Users/fumaster101/Desktop/leJOS_EV3_0.9.1-beta/samples.zip"/>
+		</list>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
 	</section>
 	<section name="NewWizardAction">
 		<item value="org.lejos.ev3.ldt.NewEV3ProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.lejos.ev3.ldt.leJOSEV3WizardCategory"/>
 		</list>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="344" key="DIALOG_X_ORIGIN"/>
+		<item value="195" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
